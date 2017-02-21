@@ -4,6 +4,10 @@ public class AsteroidMotion : MonoBehaviour {
 
 	public float minSpeed = 1;
 	public float maxSpeed = 1;
+	[Tooltip("Degrees per second")]
+	public float minRotationSpeed = -1;
+	[Tooltip("Degrees per second")]
+	public float maxRotationSpeed = 1;
 	private Rigidbody2D rb2d;
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
@@ -16,5 +20,6 @@ public class AsteroidMotion : MonoBehaviour {
 		velocity *= randomSpeed;
 
 		rb2d.velocity = velocity;
+		rb2d.angularVelocity = Random.Range(minRotationSpeed, maxRotationSpeed);
 	}
 }

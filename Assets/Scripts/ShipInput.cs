@@ -10,10 +10,6 @@ public class ShipInput : MonoBehaviour {
 	void Awake() {
 		rb2d = GetComponent<Rigidbody2D>();
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
 
 	void Update() {
 		if(Input.GetKeyDown(KeyCode.Space)){
@@ -24,8 +20,7 @@ public class ShipInput : MonoBehaviour {
 			bulletRb2d.velocity *= bulletSpeed;
 		}
 	}
-	
-	// Update is called once per frame
+		
 	void FixedUpdate () {
 		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){			
 			rb2d.AddForce(transform.up * thrust);
