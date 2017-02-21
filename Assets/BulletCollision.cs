@@ -8,6 +8,7 @@ public class BulletCollision : MonoBehaviour {
 			Destroy(gameObject);
 		} else if(other.gameObject.tag == "Player"){
 			Destroy(other.gameObject);
+			FindObjectOfType<GameEvents>().PlayerDeath.Invoke();
 		}
 	}
 }
