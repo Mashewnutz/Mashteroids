@@ -6,6 +6,8 @@ public class BulletCollision : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "Bullet"){
 			Destroy(gameObject);
-		}		
+		} else if(other.gameObject.tag == "Player"){
+			Destroy(other.gameObject);
+		}
 	}
 }
