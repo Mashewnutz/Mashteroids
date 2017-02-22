@@ -11,8 +11,18 @@ public class Score : MonoBehaviour {
 		text = GetComponent<Text>();
 		UpdateText();
 	}
-	public void OnAsteroidDestroyed(){
-		score += largeAsteroid;
+	public void OnAsteroidDestroyed(AsteroidType.Type type){
+		switch(type){
+			case AsteroidType.Type.Large:
+			score += largeAsteroid;
+			break;
+			case AsteroidType.Type.Medium:
+			score += mediumAsteroid;
+			break;
+			case AsteroidType.Type.Small:
+			score += smallAsteroid;
+			break;
+		}		
 		UpdateText();
 	}
 

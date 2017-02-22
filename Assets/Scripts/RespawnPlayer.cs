@@ -11,7 +11,7 @@ public class RespawnPlayer : MonoBehaviour {
 		if(lives > 0){
 			Invoke("Respawn", timeBetweenSpawns);
 		} else {
-			FindObjectOfType<GameEvents>().GameOver.Invoke();
+			GameEvents.instance.OnGameOver();
 		}
 	}
 

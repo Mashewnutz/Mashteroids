@@ -1,22 +1,18 @@
 ﻿using UnityEngine;
 
-public class AsteroidCollision : MonoBehaviour {
+public class AsteroidCollision : MonoBehaviour {	
 	public GameObject prefabToSpawn;
-	private GameEvents gameEvents;
 	public int explosionForce = 5;
-	void Awake() {
-		gameEvents = FindObjectOfType<GameEvents>();		
-	}
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.tag == "Bullet"){
+			GameEvents.instance.OnAsteroidDestroyed(gameObject);
 			Explode(collision);
 			Destroy(gameObject);
-			Destroy(collision.gameObject);
-			gameEvents.AsteroidDestroyed.Invoke();
+			Destroy(collision.gameObject);			
 		} else if(collision.gameObject.tag == "Player"){
-			Destroy(collision.gameObject);
-			gameEvents.PlayerDeath.Invoke();
+			GameEvents.instance.OnPlayerDeath();
+			Destroy(collision.gameObject);			
 		}
 	}
 
@@ -32,6 +28,7 @@ public class AsteroidCollision : MonoBehaviour {
 		Vector2 velocity = new Vector2(xVel, yVel);
 		velocity.Normalize();
 		velocity *= explosionForce;
+
 		asteroid1.GetComponent<Rigidbody2D>().velocity = velocity;
 		asteroid2.GetComponent<Rigidbody2D>().velocity = -velocity;
 	}
