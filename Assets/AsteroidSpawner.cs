@@ -3,11 +3,17 @@
 public class AsteroidSpawner : MonoBehaviour {
 
 	public GameObject largeAsteroidPrefab;
-	// Use this for initialization
+
 	void Start () {
 		SpawnAsteroidAtRandomPosition();
+	}	
+	void Update() {
+		int asteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length;
+		if(asteroidCount == 0){
+			SpawnAsteroidAtRandomPosition();
+		}		
 	}
-	
+
 	void SpawnAsteroidAtRandomPosition() {
 		float x = Random.Range(0, Screen.width);
 		float y = Random.Range(0, Screen.height);
