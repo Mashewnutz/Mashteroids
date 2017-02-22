@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour {
 
@@ -16,19 +17,28 @@ public class AsteroidSpawner : MonoBehaviour {
 	}
 
 	void SpawnAsteroidsAtRandomPositions(int count) {
+		List<int> indices = GenerateIndices();
 		for(int i = 0; i < count; ++i){
-			var worldPos = GetRandomAsteroidPosition();
+			int randomIndex = indices[Random.Range(0, indices.Count)];
+			indices.Remove(randomIndex);
+			var worldPos = GetAsteroidPositionAtIndex(randomIndex);
 			Instantiate(largeAsteroidPrefab, worldPos, Quaternion.identity);
 		}			
-	}
+	}	
 
 	int GetNumberOfAsteroids(int level){
 		return (int)(Mathf.Log (level, 2) + 1);
 	}
 
-	Vector3 GetRandomAsteroidPosition(){
+	List<int> GenerateIndices() {
 		int childCount = spawnPositions.transform.childCount;
-		int randomIndex = Random.Range(0, childCount);
-		return spawnPositions.transform.GetChild(randomIndex).position;
+		List<int> indices = new List<int>();
+		for(int i = 0; i < childCount; ++i){
+			indices.Add(i);
+		}
+		return indices;
+	}
+	Vector3 GetAsteroidPositionAtIndex(int index){		
+		return spawnPositions.transform.GetChild(index).position;
 	}
 }
