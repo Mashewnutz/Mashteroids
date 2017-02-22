@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletCollision : MonoBehaviour {
+public class AsteroidCollision : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
