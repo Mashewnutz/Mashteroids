@@ -5,6 +5,7 @@ public class GameEvents : MonoBehaviour {
 	public Score score;
 	public GameOver gameOver;
 	public RespawnPlayer respawnPlayer;
+	public WaveManager waveManager;
 	public static GameEvents instance;
 	void Awake(){
 		instance = this;		
@@ -17,7 +18,9 @@ public class GameEvents : MonoBehaviour {
 		gameOver.OnGameOver();
 	}
 	public void OnAsteroidDestroyed(GameObject asteroid){
-		score.OnAsteroidDestroyed(asteroid.GetComponent<AsteroidType>().type);
+		var asteroidType = asteroid.GetComponent<AsteroidType>().type;
+		score.OnAsteroidDestroyed(asteroidType);
+		waveManager.OnAsteroidDestroyed();
 	}
 	public void OnUfoDestroyed(GameObject ufo){
 		score.OnUfoDestroyed(ufo.GetComponent<UfoType>().type);

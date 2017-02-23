@@ -6,13 +6,13 @@ public class AsteroidCollision : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.tag == "Bullet"){
-			GameEvents.instance.OnAsteroidDestroyed(gameObject);
+			GameEvents.instance.OnAsteroidDestroyed(gameObject);	
 			Explode(collision);
 			Destroy(gameObject);
 			Destroy(collision.gameObject);			
-		} else if(collision.gameObject.tag == "Player"){
+		} else if(collision.gameObject.tag == "Player"){			
 			GameEvents.instance.OnPlayerDeath();
-			Destroy(collision.gameObject);			
+			Destroy(collision.gameObject);				
 		}
 	}
 

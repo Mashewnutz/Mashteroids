@@ -8,8 +8,9 @@ public class UfoSpawner : MonoBehaviour {
 	public GameObject smallUfoPrefab;
 	public int minScoreToSpawnLargeUfo;
 	public int minScoreToSpawnSmallUfo;
+	public float chanceOfSpawningUfo;
 	public GameObject ufoSpawnPositions;
-	private int ufoCheckingTime = 1;	
+	public int ufoCheckingTime = 30;
 	// Use this for initialization
 	void Start () {
 		Invoke("SpawnUfo", ufoCheckingTime);
@@ -18,11 +19,9 @@ public class UfoSpawner : MonoBehaviour {
 	void SpawnUfo(){
 		if(GameObject.FindGameObjectsWithTag("Ufo").Length == 0){
 			if(score.GetScore() > minScoreToSpawnSmallUfo){
-				var pos = GetRandomSpawnPosition();
-				Instantiate(smallUfoPrefab, pos, Quaternion.identity);
+				SpawnUfoWithChance(smallUfoPrefab, chanceOfSpawningUfo);
 			} else if(score.GetScore() > minScoreToSpawnLargeUfo){
-				var pos = GetRandomSpawnPosition();
-				Instantiate(largeUfoPrefab, pos, Quaternion.identity);
+				SpawnUfoWithChance(largeUfoPrefab, chanceOfSpawningUfo);				
 			}
 		}		
 		Invoke("SpawnUfo", ufoCheckingTime);
@@ -32,6 +31,14 @@ public class UfoSpawner : MonoBehaviour {
 		int childCount = ufoSpawnPositions.transform.childCount;
 		int randomIndex = Random.Range(0, childCount);
 		return ufoSpawnPositions.transform.GetChild(randomIndex).transform.position;
+	}
+
+	void SpawnUfoWithChance(GameObject prefab, float chance){
+		float random = Random.Range(0.0f, 1.0f);
+		if(random < chance){
+			var pos = GetRandomSpawnPosition();
+			Instantiate(prefab, pos, Quaternion.identity);
+		}		
 	}
 		
 }

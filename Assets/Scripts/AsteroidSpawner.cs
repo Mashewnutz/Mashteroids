@@ -5,15 +5,14 @@ public class AsteroidSpawner : MonoBehaviour {
 
 	public GameObject largeAsteroidPrefab;
 	public GameObject spawnPositions;
-	private int level = 0;
+	public float delayBetweenWaves = 2;
+	public GameObject waveClearedText;
 
-	void Update() {
-		int asteroidCount = GameObject.FindGameObjectsWithTag("Asteroid").Length;
-		if(asteroidCount == 0){
-			level++;
-			int newAsteroidCount = GetNumberOfAsteroids(level);
-			SpawnAsteroidsAtRandomPositions(newAsteroidCount);
-		}		
+	public int SpawnNewWave(int wave){
+		int newAsteroidCount = GetNumberOfAsteroids(wave);
+		SpawnAsteroidsAtRandomPositions(newAsteroidCount);
+		waveClearedText.SetActive(false);
+		return newAsteroidCount * 7;
 	}
 
 	void SpawnAsteroidsAtRandomPositions(int count) {
@@ -26,8 +25,8 @@ public class AsteroidSpawner : MonoBehaviour {
 		}			
 	}	
 
-	int GetNumberOfAsteroids(int level){
-		return (int)(Mathf.Log (level, 2) + 1);
+	int GetNumberOfAsteroids(int wave){
+		return (int)(Mathf.Log (wave, 2) + 1);
 	}
 
 	List<int> GenerateIndices() {
