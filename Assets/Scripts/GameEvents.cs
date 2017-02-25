@@ -29,7 +29,7 @@ public class GameEvents : MonoBehaviour {
 	}
 
 	public void OnUfoDestroyed(GameObject ufo){
-		score.OnUfoDestroyed(ufo.GetComponent<UfoType>().type);
+		score.OnUfoDestroyed(ufo.GetComponent<PoolAllocation>().poolId);
 		waveManager.OnUfoDestroyed();
 	}
 }

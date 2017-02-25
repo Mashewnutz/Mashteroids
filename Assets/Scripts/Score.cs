@@ -6,8 +6,8 @@ public class Score : MonoBehaviour {
 	public int largeAsteroid = 20;
 	public int mediumAsteroid = 50;
 	public int smallAsteroid = 100;	
-	public int smallUfo = 1000;
-	public int largeUfo = 200;
+	public int smallUfoScore = 1000;
+	public int largeUfoScore = 200;
 	private Text text;
 	private int score = 0;
 
@@ -15,7 +15,7 @@ public class Score : MonoBehaviour {
 		text = GetComponent<Text>();
 		UpdateScore();
 	}
-	
+
 	public void OnAsteroidDestroyed(PoolId asteroidType){
 		switch(asteroidType){
 			case PoolId.LargeAsteroid:
@@ -31,13 +31,13 @@ public class Score : MonoBehaviour {
 		UpdateScore();
 	}
 
-	public void OnUfoDestroyed(UfoType.Type type){
-		switch(type){
-			case UfoType.Type.Large:
-			score += largeUfo;
+	public void OnUfoDestroyed(PoolId ufoType){
+		switch(ufoType){
+			case PoolId.LargeUfo:
+			score += largeUfoScore;
 			break;
-			case UfoType.Type.Small:
-			score += smallUfo;
+			case PoolId.SmallUfo:
+			score += smallUfoScore;
 			break;
 		}
 		UpdateScore();
