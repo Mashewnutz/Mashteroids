@@ -2,8 +2,12 @@
 using UnityEngine;
 
 public enum PoolId{
+	Invalid,
 	Bullet,
-	EnemyBullet
+	EnemyBullet,
+	LargeAsteroid,
+	MediumAsteroid,
+	SmallAsteroid
 }
 
 [System.Serializable]
@@ -39,15 +43,22 @@ public class PoolManager : MonoBehaviour {
                 poolTypeComponent.poolId = poolId;
             }
 			return go;
+		} else {
+			Debug.LogError("Pool " + poolId.ToString() + " has not been configured or initialised");
 		}
 		return null;	
 	}
 
 	public void Deallocate(GameObject gameObject){
-		var poolId = gameObject.GetComponent<PoolAllocation>().poolId;
-		ObjectPool pool;
-		if(objectPoolInstances.TryGetValue(poolId, out pool)){
-			pool.Deallocate(gameObject);
-		}		
+		var allocation = gameObject.GetComponent<PoolAllocation>();
+		if(allocation){
+			ObjectPool pool;
+			if(objectPoolInstances.TryGetValue(allocation.poolId, out pool)){
+				pool.Deallocate(gameObject);
+			}		
+		} else {
+			Debug.LogError("Object " + gameObject.name + " was not allocated from a pool");
+			Destroy(gameObject);
+		}
 	}
 }

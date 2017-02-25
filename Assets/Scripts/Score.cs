@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
+	
 	public int largeAsteroid = 20;
 	public int mediumAsteroid = 50;
 	public int smallAsteroid = 100;	
@@ -9,19 +10,20 @@ public class Score : MonoBehaviour {
 	public int largeUfo = 200;
 	private Text text;
 	private int score = 0;
+
 	void Awake() {
 		text = GetComponent<Text>();
 		UpdateScore();
 	}
-	public void OnAsteroidDestroyed(AsteroidType.Type type){
-		switch(type){
-			case AsteroidType.Type.Large:
+	public void OnAsteroidDestroyed(PoolId asteroidType){
+		switch(asteroidType){
+			case PoolId.LargeAsteroid:
 			score += largeAsteroid;
 			break;
-			case AsteroidType.Type.Medium:
+			case PoolId.MediumAsteroid:
 			score += mediumAsteroid;
 			break;
-			case AsteroidType.Type.Small:
+			case PoolId.SmallAsteroid:
 			score += smallAsteroid;
 			break;
 		}		

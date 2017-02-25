@@ -23,7 +23,7 @@ public class GameEvents : MonoBehaviour {
 	}
 
 	public void OnAsteroidDestroyed(GameObject asteroid){
-		var asteroidType = asteroid.GetComponent<AsteroidType>().type;
+		var asteroidType = asteroid.GetComponent<PoolAllocation>().poolId;
 		score.OnAsteroidDestroyed(asteroidType);
 		waveManager.OnAsteroidDestroyed();
 	}

@@ -2,8 +2,7 @@
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour {
-
-	public GameObject largeAsteroidPrefab;
+	
 	public GameObject spawnPositions;
 	public float delayBetweenWaves = 2;
 	public GameObject waveClearedText;
@@ -21,7 +20,7 @@ public class AsteroidSpawner : MonoBehaviour {
 			int randomIndex = indices[Random.Range(0, indices.Count)];
 			indices.Remove(randomIndex);
 			var worldPos = GetAsteroidPositionAtIndex(randomIndex);
-			Instantiate(largeAsteroidPrefab, worldPos, Quaternion.identity);
+			PoolManager.Instance.Allocate(PoolId.LargeAsteroid, worldPos);			
 		}			
 	}	
 

@@ -2,16 +2,16 @@
 
 public class AsteroidCollision : MonoBehaviour {	
 	
-	public GameObject prefabToSpawn;
+	public PoolId childAsteroid;
 	public int explosionForce = 5;
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.tag == "Bullet"){
 			GameEvents.instance.OnAsteroidDestroyed(gameObject);	
-			Explode(collision);
-			Destroy(gameObject);
-			PoolManager.Instance.Deallocate(collision.gameObject);			
+			Explode(collision);			
+			PoolManager.Instance.Deallocate(gameObject);
+			PoolManager.Instance.Deallocate(collision.gameObject);
 		} else if(collision.gameObject.tag == "Player"){
 			GameEvents.instance.OnPlayerDeath();
 			Destroy(collision.gameObject);				
@@ -19,11 +19,11 @@ public class AsteroidCollision : MonoBehaviour {
 	}
 
 	void Explode(Collision2D collision){	
-		if(prefabToSpawn == null)	
+		if(childAsteroid == PoolId.Invalid)	
 			return;
 
-		var asteroid1 = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
-		var asteroid2 = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
+		var asteroid1 = PoolManager.Instance.Allocate(childAsteroid, transform.position);
+		var asteroid2 = PoolManager.Instance.Allocate(childAsteroid, transform.position);
 
 		float xVel = -collision.contacts[0].normal.y;
 		float yVel = collision.contacts[0].normal.x;
