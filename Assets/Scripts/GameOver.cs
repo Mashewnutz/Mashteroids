@@ -10,6 +10,7 @@ public class GameOver : MonoBehaviour {
 		gameObject.SetActive(false);
 		pressAnyKeyToContinue = transform.GetChild(0).gameObject;
 		pressAnyKeyToContinue.SetActive(false);
+		GameEvents.Instance.OnGameOver.AddListener(OnGameOver);
 	}
 
 	void Update() {

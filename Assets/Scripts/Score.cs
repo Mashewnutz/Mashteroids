@@ -12,11 +12,17 @@ public class Score : MonoBehaviour {
 	private int score = 0;
 
 	void Awake() {
-		text = GetComponent<Text>();
+		text = GetComponent<Text>();		
+	}
+
+	void Start() {
+		GameEvents.Instance.OnAsteroidDestroyed.AddListener(OnAsteroidDestroyed);
+		GameEvents.Instance.OnUfoDestroyed.AddListener(OnUfoDestroyed);
 		UpdateScore();
 	}
 
-	public void OnAsteroidDestroyed(PoolId asteroidType){
+	public void OnAsteroidDestroyed(GameObject asteroid){
+		var asteroidType = asteroid.GetComponent<PoolAllocation>().poolId;
 		switch(asteroidType){
 			case PoolId.LargeAsteroid:
 			score += largeAsteroid;
@@ -31,7 +37,8 @@ public class Score : MonoBehaviour {
 		UpdateScore();
 	}
 
-	public void OnUfoDestroyed(PoolId ufoType){
+	public void OnUfoDestroyed(GameObject ufo){
+		var ufoType = ufo.GetComponent<PoolAllocation>().poolId;
 		switch(ufoType){
 			case PoolId.LargeUfo:
 			score += largeUfoScore;

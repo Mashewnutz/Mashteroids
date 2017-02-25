@@ -6,10 +6,10 @@ public class PlayerCollision : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "EnemyBullet"){
 			PoolManager.Instance.Deallocate(gameObject);		
-			GameEvents.instance.OnPlayerDeath();
+			GameEvents.Instance.OnPlayerDestroyed.Invoke();
 		} else if(other.gameObject.tag == "Asteroid"){
 			PoolManager.Instance.Deallocate(gameObject);
-			GameEvents.instance.OnPlayerDeath();			
+			GameEvents.Instance.OnPlayerDestroyed.Invoke();			
 		}
 	}
 }

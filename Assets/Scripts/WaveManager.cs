@@ -8,15 +8,17 @@ public class WaveManager : MonoBehaviour {
 	private int wave = 1;		
 
 	void Start(){
+		GameEvents.Instance.OnAsteroidDestroyed.AddListener(OnAsteroidDestroyed);
+		GameEvents.Instance.OnUfoDestroyed.AddListener(OnUfoDestroyed);
 		waveClearedText.SetActive(false);
-		SpawnNewWave();
+		SpawnNewWave();		
 	}
 
-	public void OnAsteroidDestroyed() {
+	public void OnAsteroidDestroyed(GameObject gameObject) {
 		CheckWaveCleared();
 	}
 
-	public void OnUfoDestroyed() {
+	public void OnUfoDestroyed(GameObject ufo) {
 		CheckWaveCleared();
 	}
 

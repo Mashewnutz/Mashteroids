@@ -6,7 +6,7 @@ public class UfoCollision : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "Bullet"){			
 			PoolManager.Instance.Deallocate(gameObject);
-			GameEvents.instance.OnUfoDestroyed(gameObject);
+			GameEvents.Instance.OnUfoDestroyed.Invoke(gameObject);
 		}
 	}
 }

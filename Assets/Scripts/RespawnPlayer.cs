@@ -9,14 +9,15 @@ public class RespawnPlayer : MonoBehaviour {
 
 	void Start() {
 		Respawn();
+		GameEvents.Instance.OnPlayerDestroyed.AddListener(OnPlayerDestroyed);
 	}
 	
-	public void OnPlayerDeath () {
+	public void OnPlayerDestroyed () {
 		lives--;
 		if(lives > 0){
 			Invoke("Respawn", timeBetweenSpawns);
 		} else {
-			GameEvents.instance.OnGameOver();
+			GameEvents.Instance.OnGameOver.Invoke();
 		}
 	}
 
