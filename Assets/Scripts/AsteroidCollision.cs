@@ -9,7 +9,7 @@ public class AsteroidCollision : MonoBehaviour {
 	{
 		if(collision.gameObject.tag == "Bullet"){
 			GameEvents.instance.OnAsteroidDestroyed(gameObject);	
-			Explode(collision);			
+			Explode(collision);
 			PoolManager.Instance.Deallocate(gameObject);		
 		}
 	}
