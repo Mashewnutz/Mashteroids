@@ -6,19 +6,15 @@ public class UfoWeapon : MonoBehaviour {
 	public float fireRate;
 	public float fireAccuracy;
 	public float bulletSpeed;
-	private GameObject player;
-	private float timeUntilNextShot;
+	private GameObject player;	
 	
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
-		
-	void Update () {
-		timeUntilNextShot += Time.deltaTime;
-		if(timeUntilNextShot > fireRate){
-			Shoot();
-		}
-	}
+
+	void OnEnable() {
+		Invoke("Shoot", fireRate);
+	}	
 
 	void Shoot(){
 		if(player == null)
@@ -31,6 +27,6 @@ public class UfoWeapon : MonoBehaviour {
 		directionToPlayer.Normalize();
 		rb2d.velocity = directionToPlayer * bulletSpeed;
 		
-		timeUntilNextShot = 0;
+		Invoke("Shoot", fireRate);
 	}
 }
