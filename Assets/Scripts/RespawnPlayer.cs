@@ -6,6 +6,10 @@ public class RespawnPlayer : MonoBehaviour {
 	public GameObject playerPrefab;
 	public float timeBetweenSpawns = 1;
 	public int lives = 3;
+
+	void Start() {
+		Respawn();
+	}
 	
 	public void OnPlayerDeath () {
 		lives--;
@@ -17,6 +21,6 @@ public class RespawnPlayer : MonoBehaviour {
 	}
 
 	void Respawn(){
-		GameObject.Instantiate(playerPrefab);
+		PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero);		
 	}
 }
