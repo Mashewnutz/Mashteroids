@@ -3,6 +3,7 @@
 public class Teleport : MonoBehaviour {
 		
 	public KeyCode teleportKey = KeyCode.E;
+	
 	void Update () {
 		if(Input.GetKeyDown(teleportKey)){
 			float x = Random.Range(0, Screen.width);

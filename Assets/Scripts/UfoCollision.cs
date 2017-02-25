@@ -4,9 +4,9 @@ public class UfoCollision : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if(other.gameObject.tag == "Bullet"){
+		if(other.gameObject.tag == "Bullet"){			
+			PoolManager.Instance.Deallocate(gameObject);
 			GameEvents.instance.OnUfoDestroyed(gameObject);
-			Destroy(gameObject);
 		}
 	}
 }

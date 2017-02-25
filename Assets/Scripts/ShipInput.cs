@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class ShipInput : MonoBehaviour {
+	
 	public GameObject bulletPrefab;
 	public float thrust = 1.0f;
 	public float rotation = 1.0f;

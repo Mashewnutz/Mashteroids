@@ -2,9 +2,7 @@
 
 public class UfoSpawner : MonoBehaviour {
 
-	public Score score;
-	public GameObject largeUfoPrefab;
-	public GameObject smallUfoPrefab;
+	public Score score;	
 	public int minScoreToSpawnLargeUfo;
 	public int minScoreToSpawnSmallUfo;
 	public float chanceOfSpawningUfo;
@@ -16,27 +14,33 @@ public class UfoSpawner : MonoBehaviour {
 	}
 
 	void SpawnUfo(){
-		if(GameObject.FindGameObjectsWithTag("Ufo").Length == 0){
+		int ufoCount = GetUfoCount();
+		if(ufoCount == 0){
 			if(score.GetScore() > minScoreToSpawnSmallUfo){
-				SpawnUfoWithChance(smallUfoPrefab, chanceOfSpawningUfo);
+				SpawnUfoWithChance(PoolId.SmallUfo, chanceOfSpawningUfo);
 			} else if(score.GetScore() > minScoreToSpawnLargeUfo){
-				SpawnUfoWithChance(largeUfoPrefab, chanceOfSpawningUfo);				
+				SpawnUfoWithChance(PoolId.LargeUfo, chanceOfSpawningUfo);				
 			}
 		}		
 		Invoke("SpawnUfo", ufoCheckingTime);
 	}
 
+	int GetUfoCount() {
+		int largeUfos = PoolManager.Instance.GetAllocatedCount(PoolId.LargeUfo);
+		int smallUfos = PoolManager.Instance.GetAllocatedCount(PoolId.SmallUfo);
+		return largeUfos + smallUfos;
+	}
 	Vector3 GetRandomSpawnPosition(){
 		int childCount = ufoSpawnPositions.transform.childCount;
 		int randomIndex = Random.Range(0, childCount);
 		return ufoSpawnPositions.transform.GetChild(randomIndex).transform.position;
 	}
 
-	void SpawnUfoWithChance(GameObject prefab, float chance){
+	void SpawnUfoWithChance(PoolId ufoType, float chance){
 		float random = Random.Range(0.0f, 1.0f);
 		if(random < chance){
 			var pos = GetRandomSpawnPosition();
-			Instantiate(prefab, pos, Quaternion.identity);
+			PoolManager.Instance.Allocate(ufoType, pos);			
 		}		
 	}
 		

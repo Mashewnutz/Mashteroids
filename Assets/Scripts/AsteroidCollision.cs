@@ -8,9 +8,9 @@ public class AsteroidCollision : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.tag == "Bullet"){
-			GameEvents.instance.OnAsteroidDestroyed(gameObject);	
 			Explode(collision);
-			PoolManager.Instance.Deallocate(gameObject);		
+			PoolManager.Instance.Deallocate(gameObject);
+			GameEvents.instance.OnAsteroidDestroyed(gameObject);							
 		}
 	}
 

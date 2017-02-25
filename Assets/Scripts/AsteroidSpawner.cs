@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour {
 	
-	public GameObject spawnPositions;
-	public float delayBetweenWaves = 2;
+	public GameObject spawnPositions;	
 	public GameObject waveClearedText;
+	public float delayBetweenWaves = 2;
 
-	public int SpawnNewWave(int wave){
+	public void SpawnNewWave(int wave){
 		int newAsteroidCount = GetNumberOfAsteroids(wave);
 		SpawnAsteroidsAtRandomPositions(newAsteroidCount);
-		waveClearedText.SetActive(false);
-		return newAsteroidCount * 7;
+		waveClearedText.SetActive(false);		
 	}
 
 	void SpawnAsteroidsAtRandomPositions(int count) {

@@ -3,10 +3,14 @@
 public class ReturnToPoolWhenGoingOffScreen : MonoBehaviour {	
 
 	private Renderer componentRenderer;
-	private bool isVisible = false;
+	private bool isVisible;
 
 	void Awake(){
 		componentRenderer = GetComponent<Renderer>();
+	}
+
+	void OnEnable() {
+		isVisible = false;
 	}
 	
 	void Update () {		
@@ -20,6 +24,6 @@ public class ReturnToPoolWhenGoingOffScreen : MonoBehaviour {
 	}
 
 	void ReturnToPool() {
-		PoolManager.Instance.Deallocate(gameObject);		
+   		PoolManager.Instance.Deallocate(gameObject);		
 	}
 }

@@ -14,6 +14,7 @@ public class ObjectPool {
         this.growSize = growSize;
         this.objectPool = new List<GameObject>();
         this.prefab = prefab;
+        this.prefab.SetActive(false);
         Expand(preallocate);        
     }
 
@@ -37,6 +38,10 @@ public class ObjectPool {
         allocated--;
     }
 
+    public int GetAllocatedCount(){
+        return allocated;
+    }
+
     void Expand(int count){ 
         for(int i = 0; i < count; ++i){
             var go = GameObject.Instantiate(prefab);
@@ -44,9 +49,5 @@ public class ObjectPool {
             go.SetActive(false);            
             objectPool.Add(go);
         }
-    }
-
-    int GetAllocatedCount(){
-        return allocated;
-    }
+    }    
 }

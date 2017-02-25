@@ -6,13 +6,10 @@ public class UfoWeapon : MonoBehaviour {
 	public float fireRate;
 	public float fireAccuracy;
 	public float bulletSpeed;
-	private GameObject player;	
-	
-	void Awake() {
-		player = GameObject.FindGameObjectWithTag("Player");
-	}
+	private GameObject player;
 
 	void OnEnable() {
+		player = GameObject.FindGameObjectWithTag("Player");
 		Invoke("Shoot", fireRate);
 	}	
 

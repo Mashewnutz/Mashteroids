@@ -7,7 +7,10 @@ public enum PoolId{
 	EnemyBullet,
 	LargeAsteroid,
 	MediumAsteroid,
-	SmallAsteroid
+	SmallAsteroid,
+	LargeUfo,
+	SmallUfo,
+	Player
 }
 
 [System.Serializable]
@@ -45,8 +48,8 @@ public class PoolManager : MonoBehaviour {
 			return go;
 		} else {
 			Debug.LogError("Pool " + poolId.ToString() + " has not been configured or initialised");
-		}
-		return null;	
+			return null;
+		}		
 	}
 
 	public void Deallocate(GameObject gameObject){
@@ -60,5 +63,15 @@ public class PoolManager : MonoBehaviour {
 			Debug.LogError("Object " + gameObject.name + " was not allocated from a pool");
 			Destroy(gameObject);
 		}
+	}
+
+	public int GetAllocatedCount(PoolId poolId){
+		ObjectPool pool;
+		if(objectPoolInstances.TryGetValue(poolId, out pool)){
+			return pool.GetAllocatedCount();
+		} else {
+			Debug.LogError("Pool " + poolId.ToString() + " has not been configured or initialised");
+			return 0;
+		}		
 	}
 }

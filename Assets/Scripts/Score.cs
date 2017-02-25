@@ -15,6 +15,7 @@ public class Score : MonoBehaviour {
 		text = GetComponent<Text>();
 		UpdateScore();
 	}
+	
 	public void OnAsteroidDestroyed(PoolId asteroidType){
 		switch(asteroidType){
 			case PoolId.LargeAsteroid:
