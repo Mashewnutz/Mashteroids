@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour {
@@ -14,28 +15,25 @@ public class AsteroidSpawner : MonoBehaviour {
 	}
 
 	void SpawnAsteroidsAtRandomPositions(int count) {
-		List<int> indices = GenerateIndices();
+		List<Vector3> positions = GeneratePositions();
 		for(int i = 0; i < count; ++i){
-			int randomIndex = indices[Random.Range(0, indices.Count)];
-			indices.Remove(randomIndex);
-			var worldPos = GetAsteroidPositionAtIndex(randomIndex);
-			PoolManager.Instance.Allocate(PoolId.LargeAsteroid, worldPos);			
+			var position = positions[0];
+			positions.RemoveAt(0);			
+			PoolManager.Instance.Allocate(PoolId.LargeAsteroid, position);			
 		}			
 	}	
 
 	int GetNumberOfAsteroids(int wave){
-		return (int)(Mathf.Log (wave, 2) + 1);
+		return 1 + Mathf.RoundToInt(wave * 0.5f);
 	}
 
-	List<int> GenerateIndices() {
-		int childCount = spawnPositions.transform.childCount;
-		List<int> indices = new List<int>();
-		for(int i = 0; i < childCount; ++i){
-			indices.Add(i);
+	List<Vector3> GeneratePositions() {
+		List<Vector3> positions = new List<Vector3>();
+		foreach(Transform child in spawnPositions.transform){
+			positions.Add(child.position);
 		}
-		return indices;
-	}
-	Vector3 GetAsteroidPositionAtIndex(int index){		
-		return spawnPositions.transform.GetChild(index).position;
+
+		var random = new Random();		
+		return positions.OrderBy(item => Random.Range(0.0f, 100.0f)).ToList();
 	}
 }

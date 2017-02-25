@@ -5,7 +5,7 @@ public class WaveManager : MonoBehaviour {
 	public AsteroidSpawner asteroidSpawner;
 	public GameObject waveClearedText;
 	public float delayBetweenWaves;
-	private int wave = 1;		
+	public int wave = 1;		
 
 	void Start(){
 		GameEvents.Instance.OnAsteroidDestroyed.AddListener(OnAsteroidDestroyed);
