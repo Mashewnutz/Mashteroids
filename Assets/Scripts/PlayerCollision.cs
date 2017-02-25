@@ -6,8 +6,10 @@ public class PlayerCollision : MonoBehaviour {
 	{
 		if(other.gameObject.tag == "EnemyBullet"){
 			GameEvents.instance.OnPlayerDeath();
+			Destroy(gameObject);						
+		} else if(other.gameObject.tag == "Asteroid"){
+			GameEvents.instance.OnPlayerDeath();
 			Destroy(gameObject);
-			Destroy(other.gameObject);			
 		}
 	}
 }

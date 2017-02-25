@@ -7,7 +7,6 @@ public class UfoCollision : MonoBehaviour {
 		if(other.gameObject.tag == "Bullet"){
 			GameEvents.instance.OnUfoDestroyed(gameObject);
 			Destroy(gameObject);
-			Destroy(other.gameObject);			
 		}
 	}
 }
