@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 
 public class AsteroidCollision : MonoBehaviour {	
+	
 	public GameObject prefabToSpawn;
 	public int explosionForce = 5;
+
 	void OnCollisionEnter2D(Collision2D collision)
 	{
 		if(collision.gameObject.tag == "Bullet"){
 			GameEvents.instance.OnAsteroidDestroyed(gameObject);	
 			Explode(collision);
 			Destroy(gameObject);
-			Destroy(collision.gameObject);			
-		} else if(collision.gameObject.tag == "Player"){			
+			PoolManager.Instance.Deallocate(collision.gameObject);			
+		} else if(collision.gameObject.tag == "Player"){
 			GameEvents.instance.OnPlayerDeath();
 			Destroy(collision.gameObject);				
 		}

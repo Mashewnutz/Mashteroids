@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class UfoWeapon : MonoBehaviour {
-	public GameObject bulletPrefab;
+	
 	public float fireRate;
 	public float fireAccuracy;
 	public float bulletSpeed;
@@ -12,8 +12,7 @@ public class UfoWeapon : MonoBehaviour {
 	void Awake() {
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
-	
-	// Update is called once per frame
+		
 	void Update () {
 		timeUntilNextShot += Time.deltaTime;
 		if(timeUntilNextShot > fireRate){
@@ -25,7 +24,7 @@ public class UfoWeapon : MonoBehaviour {
 		if(player == null)
 			return;
 
-		var bullet = GameObject.Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+		var bullet = PoolManager.Instance.Allocate(PoolId.EnemyBullet, transform.position);
 		var rb2d = bullet.GetComponent<Rigidbody2D>();
 		
 		var directionToPlayer = player.transform.position - bullet.transform.position;

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UfoSpawner : MonoBehaviour {
+
 	public Score score;
 	public GameObject largeUfoPrefab;
 	public GameObject smallUfoPrefab;
@@ -11,7 +10,7 @@ public class UfoSpawner : MonoBehaviour {
 	public float chanceOfSpawningUfo;
 	public GameObject ufoSpawnPositions;
 	public int ufoCheckingTime = 30;
-	// Use this for initialization
+	
 	void Start () {
 		Invoke("SpawnUfo", ufoCheckingTime);
 	}

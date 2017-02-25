@@ -13,11 +13,7 @@ public class ShipInput : MonoBehaviour {
 
 	void Update() {
 		if(Input.GetKeyDown(KeyCode.Space)){
-			var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-			var bulletRb2d = bullet.GetComponent<Rigidbody2D>();
-			bulletRb2d.velocity = transform.up;
-			bulletRb2d.velocity.Normalize();
-			bulletRb2d.velocity *= bulletSpeed;
+			Fire();			
 		}
 	}
 		
@@ -31,6 +27,14 @@ public class ShipInput : MonoBehaviour {
 		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
 			rb2d.rotation -= rotation;
 		}
+	}
+
+	void Fire() {
+		var bullet = PoolManager.Instance.Allocate(PoolId.Bullet, transform.position);		
+		var bulletRb2d = bullet.GetComponent<Rigidbody2D>();
+		bulletRb2d.velocity = transform.up;
+		bulletRb2d.velocity.Normalize();
+		bulletRb2d.velocity *= bulletSpeed;
 	}
 
 }
