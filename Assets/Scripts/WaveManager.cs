@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour {
 
@@ -41,6 +42,7 @@ public class WaveManager : MonoBehaviour {
 	}
 
 	void SpawnNewWave(){
+		waveClearedText.GetComponent<Text>().text = "WAVE " + wave + " CLEARED";
 		waveClearedText.SetActive(false);
 		asteroidSpawner.SpawnNewWave(wave);
 	}

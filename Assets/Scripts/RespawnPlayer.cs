@@ -22,6 +22,7 @@ public class RespawnPlayer : MonoBehaviour {
 	}
 
 	void Respawn(){
-		PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero);		
+		//if(PoolManager.Instance.GetAllocatedCount(PoolId.Player) == 0)
+			//PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero);
 	}
 }

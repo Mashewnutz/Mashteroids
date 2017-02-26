@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class UfoWeapon : MonoBehaviour {
 	
-	public float fireRate;
-	public float fireAccuracy;
+	[RangeAttribute(0, 1)]
+	public float accuracy;
+	public float fireRate;	
 	public float bulletSpeed;	
-
-	void OnEnable() {		
-		Invoke("Shoot", fireRate);		
+	private float fireInterval;
+	
+	void OnEnable() {
+		fireInterval = 1.0f/fireRate;
+		Shoot();		
 	}
 	
 	void OnDisable()
@@ -16,18 +19,19 @@ public class UfoWeapon : MonoBehaviour {
 		CancelInvoke();
 	}
 
-	void Shoot(){
+	void Shoot(){		
 		var player = GameObject.FindGameObjectWithTag("Player");
-		if(player == null)
-			return;
-
-		var bullet = PoolManager.Instance.Allocate(PoolId.EnemyBullet, transform.position);
-		var rb2d = bullet.GetComponent<Rigidbody2D>();
-		
-		var directionToPlayer = player.transform.position - bullet.transform.position;
-		directionToPlayer.Normalize();
-		rb2d.velocity = directionToPlayer * bulletSpeed;
-		
-		Invoke("Shoot", fireRate);
+		if(player != null){			
+			var bullet = PoolManager.Instance.Allocate(PoolId.EnemyBullet, transform.position);
+			var rb2d = bullet.GetComponent<Rigidbody2D>();
+			
+			var directionToPlayer = player.transform.position - bullet.transform.position;
+			directionToPlayer.Normalize();
+			
+			var randomAngle = Random.Range(-180, 180) * (1.0f-accuracy);
+			var bulletDirection = Quaternion.AngleAxis(randomAngle, Vector3.forward) * directionToPlayer;
+			rb2d.velocity = bulletDirection * bulletSpeed;	
+		}		
+		Invoke("Shoot", fireInterval);
 	}
 }
