@@ -4,7 +4,7 @@ public class AsteroidCollision : MonoBehaviour {
 
 	public GameObject explosion;
 	public PoolId childAsteroid;
-	public int explosionForce = 5;
+	public float explosionForce;
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -18,7 +18,7 @@ public class AsteroidCollision : MonoBehaviour {
 	void Explode(Collision2D collision){	
 		if(explosion != null)
 			GameObject.Instantiate(explosion, transform.position, transform.rotation);
-			
+
 		if(childAsteroid == PoolId.Invalid)	
 			return;
 

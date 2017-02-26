@@ -31,6 +31,6 @@ public class MissileLauncher : Pickup {
 		launcher.SetActive(false);
 		var missile = PoolManager.Instance.Allocate(PoolId.Missile, launcher.transform.position, launcher.transform.rotation);		
 		var missileRb2d = missile.GetComponent<Rigidbody2D>();
-		missileRb2d.velocity = rb2d.velocity;
+		missileRb2d.velocity = rb2d.velocity.magnitude * transform.up;
 	}
 }

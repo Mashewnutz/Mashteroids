@@ -24,5 +24,9 @@ public class WrapPosition : MonoBehaviour {
 	void SetScreenPosition(Vector3 screenPosition){
 		var worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 		transform.position = worldPosition;
+		var tr = GetComponentInChildren<TrailRenderer>();
+		if(tr){
+			tr.Clear();
+		}
 	}
 }

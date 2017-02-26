@@ -15,7 +15,7 @@ public class ObjectPool {
         this.objectPool = new List<GameObject>();
         this.prefab = prefab;
         this.prefab.SetActive(false);
-        Expand(preallocate);        
+        Expand(preallocate);
     }
 
     public GameObject Allocate(Vector3 position, Quaternion rotation){
