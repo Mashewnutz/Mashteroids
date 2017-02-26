@@ -18,7 +18,7 @@ public class PickupText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnPickupCollected (GameObject pickup) {
-		text.text = pickup.name;
+		text.text = pickup.name.ToUpper();
 		gameObject.SetActive(true);
 		Invoke("Hide", displayTime);
 	}

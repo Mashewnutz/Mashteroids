@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour {
 
-	public AsteroidSpawner asteroidSpawner;
-	public GameObject waveClearedText;
+	public AsteroidSpawner asteroidSpawner;	
 	public float delayBetweenWaves;
-	public int wave = 1;		
+	public int wave = 0;
 
 	void Start(){
 		GameEvents.Instance.OnAsteroidDestroyed.AddListener(OnAsteroidDestroyed);
-		GameEvents.Instance.OnUfoDestroyed.AddListener(OnUfoDestroyed);
-		waveClearedText.SetActive(false);
+		GameEvents.Instance.OnUfoDestroyed.AddListener(OnUfoDestroyed);		
 		SpawnNewWave();		
 	}
 
@@ -26,8 +23,7 @@ public class WaveManager : MonoBehaviour {
 	void CheckWaveCleared() {
 		int totalObjects = GetTotalObjectCount();
 		if(totalObjects == 0){
-			wave++;
-			waveClearedText.SetActive(true);			
+			GameEvents.Instance.OnWaveCleared.Invoke(wave);			
 			Invoke("SpawnNewWave", delayBetweenWaves);
 		}
 	}
@@ -42,8 +38,8 @@ public class WaveManager : MonoBehaviour {
 	}
 
 	void SpawnNewWave(){
-		waveClearedText.GetComponent<Text>().text = "WAVE " + wave + " CLEARED";
-		waveClearedText.SetActive(false);
+		wave++;
 		asteroidSpawner.SpawnNewWave(wave);
+		GameEvents.Instance.OnNewWave.Invoke(wave);
 	}
 }
