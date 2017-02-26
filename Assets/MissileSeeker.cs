@@ -16,6 +16,10 @@ public class MissileSeeker : MonoBehaviour {
 	void OnEnable(){
 		target = FindTarget();
 	}
+
+	void OnDisable(){
+		target = null;
+	}
 	
 	void Update () {		
 		if(target != null){

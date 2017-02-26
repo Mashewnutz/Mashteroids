@@ -9,6 +9,11 @@ public class ObjectCollector : MonoBehaviour {
 	void OnEnable(){
 		objects = new List<GameObject>();
 	}
+	
+	void OnDisable()
+	{
+		objects.Clear();
+	}
 
 	void Update(){
 		if(debugDrawObjects){
