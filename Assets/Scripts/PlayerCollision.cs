@@ -16,6 +16,9 @@ public class PlayerCollision : MonoBehaviour {
 		} else if(other.gameObject.tag == "Asteroid"){
 			PoolManager.Instance.Deallocate(gameObject);
 			GameEvents.Instance.OnPlayerDestroyed.Invoke();			
+		} else if(other.gameObject.tag == "Ufo"){
+			PoolManager.Instance.Deallocate(gameObject);
+			GameEvents.Instance.OnPlayerDestroyed.Invoke();
 		}
 	}
 }
