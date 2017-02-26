@@ -9,8 +9,7 @@ public class BlackholeLauncher : Pickup {
 	public override void AttachToPlayer (GameObject player) {
 		transform.SetParent(player.transform, false);
 	}
-	
-	// Update is called once per frame
+		
 	void Update () {
 		if(Input.GetMouseButtonDown(1)){
 			LaunchBlackhole(blackholeLauncher);
