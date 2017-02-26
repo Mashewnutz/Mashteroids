@@ -1,26 +1,35 @@
 ﻿using UnityEngine;
 
 public class ReturnToPoolWhenGoingOffScreen : MonoBehaviour {	
-
-	private Renderer componentRenderer;
-	private bool isVisible;
-
-	void Awake(){
-		componentRenderer = GetComponent<Renderer>();
-	}
+	
+	private bool objectHasComeOnScreen;
 
 	void OnEnable() {
-		isVisible = false;
+		objectHasComeOnScreen = false;
 	}
 	
-	void Update () {		
-		if(componentRenderer.isVisible){
-			isVisible = true;
+	void Update () {
+		var visibleThisFrame = IsVisible();
+		if(visibleThisFrame){
+			objectHasComeOnScreen = true;
 		}
 			
-		if(isVisible && !componentRenderer.isVisible){
+		if(objectHasComeOnScreen && !visibleThisFrame){
 			ReturnToPool();
 		}
+	}
+
+	bool IsVisible() {
+		var screenPos = Camera.main.WorldToScreenPoint(transform.position);
+		if(screenPos.x < 0)
+			return false;
+		if(screenPos.x > Screen.width)
+			return false;
+		if(screenPos.y < 0)
+			return false;
+		if(screenPos.y > Screen.height)
+			return false;
+		return true;
 	}
 
 	void ReturnToPool() {
