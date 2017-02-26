@@ -27,12 +27,10 @@ public class ShipInput : MonoBehaviour {
 	}
 
 	void Update() {
-		if(Input.GetKeyDown(KeyCode.Space)){			
+		if(Input.GetMouseButtonDown(0)){
 			Fire();
-		} else if(Input.GetKeyUp(KeyCode.Space)){
+		} else if(Input.GetMouseButtonUp(0)){
 			CancelInvoke();			
-		} else if(Input.GetKeyDown(KeyCode.H)){
-			FireMissle();
 		}
 	}
 		
@@ -61,9 +59,4 @@ public class ShipInput : MonoBehaviour {
 		bulletRb2d.velocity *= bulletSpeed;
 		Invoke("Fire", fireInterval);
 	}
-
-	void FireMissle() {
-
-	}
-
 }

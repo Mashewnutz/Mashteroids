@@ -12,7 +12,7 @@ public class MissileLauncher : Pickup {
 	}
 
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.H)){			
+		if(Input.GetMouseButtonDown(1)){			
 			if(leftMissile != null){
 				LaunchMissile(leftMissile);				
 				leftMissile = null;

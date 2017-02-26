@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
@@ -8,25 +7,17 @@ public class GameOver : MonoBehaviour {
 
 	void Start() {		
 		gameObject.SetActive(false);
-		pressAnyKeyToContinue = transform.GetChild(0).gameObject;
-		pressAnyKeyToContinue.SetActive(false);
-		GameEvents.Instance.OnGameOver.AddListener(OnGameOver);
-	}
-
-	void Update() {
-		gameOverDelay -= Time.deltaTime;
-
-		if(Input.anyKeyDown && gameOverDelay <= 0){
-			SceneManager.LoadScene("Title");
-		}
-	}
-
-	void ShowPressAnyKeyToContinueText(){
-		pressAnyKeyToContinue.SetActive(true);
+		pressAnyKeyToContinue = transform.GetChild(0).gameObject;		
+		GameEvents.Instance.OnGameOver.AddListener(OnGameOver);		
 	}
 
 	public void OnGameOver() {
 		gameObject.SetActive(true);
 		Invoke("ShowPressAnyKeyToContinueText", gameOverDelay);
 	}
+
+	void ShowPressAnyKeyToContinueText(){
+		pressAnyKeyToContinue.SetActive(true);
+	}
+
 }
