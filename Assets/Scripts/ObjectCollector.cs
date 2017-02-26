@@ -24,7 +24,8 @@ public class ObjectCollector : MonoBehaviour {
 	}
 
 	void PurgeDeadObjects(){		
-		objects.RemoveAll(obj => obj == null);		
+		objects.RemoveAll(obj => obj == null);
+		objects.RemoveAll(obj => !obj.activeSelf);	
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
