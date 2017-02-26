@@ -3,8 +3,7 @@
 public class MissileSeeker : MonoBehaviour {
 
 	public float thrust = 1;
-	public float torque = 1f;
-	public float angleToTarget;
+	public float torque = 1f;	
 	private GameObject target = null;
 	private Rigidbody2D rb2d;
 	ObjectCollector objectCollector;
@@ -19,14 +18,21 @@ public class MissileSeeker : MonoBehaviour {
 	}
 	
 	void Update () {		
-		rb2d.AddForce(transform.up * thrust);
+		if(target != null){
 
-		if(target){
 			var directionToTarget = target.transform.position - transform.position;
-			Debug.DrawLine(transform.position, target.transform.position);
-			float angleToTarget = SignedAngle(transform.up, directionToTarget);			
-			rb2d.AddTorque(angleToTarget*torque);
+			Debug.DrawLine(transform.position, target.transform.position);						
+			directionToTarget.Normalize();
+			
+			if(Vector3.Dot(transform.up, directionToTarget) < 0){
+				target = null;
+				rb2d.AddForce(transform.up * thrust);
+			} else {
+				rb2d.AddForce(directionToTarget * thrust);
+			}			
+
 		} else {
+			rb2d.AddForce(transform.up * thrust);
 			target = FindTarget();
 		}
 	}

@@ -18,7 +18,7 @@ public class ObjectPool {
         Expand(preallocate);        
     }
 
-    public GameObject Allocate(Vector3 position){
+    public GameObject Allocate(Vector3 position, Quaternion rotation){
         if(objectPool.Count == 0){
             Expand(growSize);
         }  
@@ -26,6 +26,7 @@ public class ObjectPool {
         var go = objectPool[objectPool.Count-1];
         objectPool.RemoveAt(objectPool.Count-1);
         go.transform.position = position;
+        go.transform.rotation = rotation;
         go.SetActive(true);      
         allocated++; 
         return go;

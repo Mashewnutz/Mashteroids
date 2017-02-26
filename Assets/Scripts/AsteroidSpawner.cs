@@ -19,7 +19,7 @@ public class AsteroidSpawner : MonoBehaviour {
 		for(int i = 0; i < count; ++i){
 			var position = positions[0];
 			positions.RemoveAt(0);			
-			PoolManager.Instance.Allocate(PoolId.LargeAsteroid, position);			
+			PoolManager.Instance.Allocate(PoolId.LargeAsteroid, position, Quaternion.identity);			
 		}			
 	}	
 
@@ -31,9 +31,7 @@ public class AsteroidSpawner : MonoBehaviour {
 		List<Vector3> positions = new List<Vector3>();
 		foreach(Transform child in spawnPositions.transform){
 			positions.Add(child.position);
-		}
-
-		var random = new Random();		
-		return positions.OrderBy(item => Random.Range(0.0f, 100.0f)).ToList();
+		}	
+		return positions.OrderBy(item => Random.value).ToList();
 	}
 }

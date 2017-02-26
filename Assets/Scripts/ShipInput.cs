@@ -54,7 +54,7 @@ public class ShipInput : MonoBehaviour {
 	}
 
 	void Fire() {
-		var bullet = PoolManager.Instance.Allocate(PoolId.Bullet, transform.position);		
+		var bullet = PoolManager.Instance.Allocate(PoolId.Bullet, transform.position, Quaternion.identity);		
 		var bulletRb2d = bullet.GetComponent<Rigidbody2D>();
 		bulletRb2d.velocity = transform.up;
 		bulletRb2d.velocity.Normalize();

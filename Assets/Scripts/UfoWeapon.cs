@@ -22,7 +22,7 @@ public class UfoWeapon : MonoBehaviour {
 	void Shoot(){		
 		var player = GameObject.FindGameObjectWithTag("Player");
 		if(player != null){			
-			var bullet = PoolManager.Instance.Allocate(PoolId.EnemyBullet, transform.position);
+			var bullet = PoolManager.Instance.Allocate(PoolId.EnemyBullet, transform.position, Quaternion.identity);
 			var rb2d = bullet.GetComponent<Rigidbody2D>();
 			
 			var directionToPlayer = player.transform.position - bullet.transform.position;

@@ -14,6 +14,12 @@ public class ObjectCollector : MonoBehaviour {
 		if(debugDrawObjects){
 			DebugDrawObjects();
 		}
+
+		PurgeDeadObjects();
+	}
+
+	void PurgeDeadObjects(){		
+		objects.RemoveAll(obj => obj == null);		
 	}
 
 	void OnTriggerEnter2D(Collider2D other)

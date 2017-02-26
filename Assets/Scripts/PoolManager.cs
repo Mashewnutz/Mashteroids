@@ -10,7 +10,8 @@ public enum PoolId{
 	SmallAsteroid,
 	LargeUfo,
 	SmallUfo,
-	Player
+	Player,
+	Missile
 }
 
 [System.Serializable]
@@ -36,10 +37,10 @@ public class PoolManager : MonoBehaviour {
 		}	
 	}
 
-	public GameObject Allocate(PoolId poolId, Vector3 position){
+	public GameObject Allocate(PoolId poolId, Vector3 position, Quaternion rotation){
 		ObjectPool pool;
 		if(objectPoolInstances.TryGetValue(poolId, out pool)){
-			var go = pool.Allocate(position);
+			var go = pool.Allocate(position, rotation);
 			var poolTypeComponent = go.GetComponent<PoolAllocation>();
             if(!poolTypeComponent){
                 poolTypeComponent = go.AddComponent<PoolAllocation>();

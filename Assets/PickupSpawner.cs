@@ -2,7 +2,8 @@
 
 public class PickupSpawner : MonoBehaviour {
 		
-	public GameObject[] pickups;
+	public GameObject genericPickupPrefab;
+	public GameObject[] pickupPrefabs;	
 
 	void Start () {
 		GameEvents.Instance.OnUfoDestroyed.AddListener(OnUfoDestroyed);		
@@ -13,8 +14,10 @@ public class PickupSpawner : MonoBehaviour {
 	}
 
 	void SpawnRandomPowerup(GameObject ufo){
-		int index = Random.Range(0, pickups.Length);
-		var pickup = pickups[index];
-		GameObject.Instantiate(pickup, ufo.transform.position, Quaternion.identity);
+		int index = Random.Range(0, pickupPrefabs.Length);
+		var pickup = pickupPrefabs[index];
+		var pickupContainer = GameObject.Instantiate(genericPickupPrefab, ufo.transform.position, Quaternion.identity);
+		var spawnedPickup = GameObject.Instantiate(pickup, ufo.transform.position, Quaternion.identity, pickupContainer.transform);
+		spawnedPickup.SetActive(false);
 	}
 }

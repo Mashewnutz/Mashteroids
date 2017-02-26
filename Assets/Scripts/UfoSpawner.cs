@@ -40,7 +40,7 @@ public class UfoSpawner : MonoBehaviour {
 		float random = Random.Range(0.0f, 1.0f);
 		if(random < chance){
 			var pos = GetRandomSpawnPosition();
-			PoolManager.Instance.Allocate(ufoType, pos);			
+			PoolManager.Instance.Allocate(ufoType, pos, Quaternion.identity);			
 		}		
 	}
 		
