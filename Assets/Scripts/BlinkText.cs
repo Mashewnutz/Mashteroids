@@ -10,12 +10,12 @@ public class BlinkText : MonoBehaviour {
 		text = GetComponent<Text>();			
 	}
 
-	void Start () {
-		Invoke("HideShowSprite", rate);
+	void OnEnable () {
+		Invoke("HideShowText", rate);
 	}
 	
-	void HideShowSprite(){
+	void HideShowText(){
 		text.enabled = !text.enabled;		
-		Invoke("HideShowSprite", rate);
+		Invoke("HideShowText", rate);
 	}
 }

@@ -14,7 +14,7 @@ public class BlackholeLauncher : Pickup {
 	void Update () {
 		if(Input.GetMouseButtonDown(1)){
 			LaunchBlackhole(blackholeLauncher);
-			blackholeLauncher.SetActive(false);
+			Destroy(gameObject);
 		}	
 	}
 
