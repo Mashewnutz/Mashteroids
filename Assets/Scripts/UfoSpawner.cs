@@ -13,6 +13,12 @@ public class UfoSpawner : MonoBehaviour {
 		Invoke("SpawnUfo", ufoCheckingTime);
 	}
 
+	void Update(){
+		if(Input.GetKeyDown(KeyCode.U)){
+			SpawnUfoWithChance(PoolId.LargeUfo, 1);
+		}
+	}
+
 	void SpawnUfo(){
 		int ufoCount = GetUfoCount();
 		if(ufoCount == 0){

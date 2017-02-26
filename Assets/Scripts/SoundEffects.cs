@@ -12,5 +12,6 @@ public class SoundEffects : MonoBehaviour {
 
 	public void Play (AudioClip clip) {		
 		output.PlayOneShot(clip);
+		
 	}
 }
