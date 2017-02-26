@@ -18,6 +18,7 @@ public class PickupSpawner : MonoBehaviour {
 		var pickup = pickupPrefabs[index];
 		var pickupContainer = GameObject.Instantiate(genericPickupPrefab, ufo.transform.position, Quaternion.identity);
 		var spawnedPickup = GameObject.Instantiate(pickup, ufo.transform.position, Quaternion.identity, pickupContainer.transform);
+		spawnedPickup.name = pickup.name;
 		spawnedPickup.SetActive(false);
 	}
 }

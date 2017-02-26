@@ -10,6 +10,7 @@ public class GameEvents : MonoBehaviour {
 	public UnityEvent OnPlayerDestroyed = new UnityEvent();	
 	public GameObjectEvent OnAsteroidDestroyed = new GameObjectEvent();
 	public GameObjectEvent OnUfoDestroyed = new GameObjectEvent();
+	public GameObjectEvent OnPickupCollected = new GameObjectEvent();
 
 	void Awake(){
 		Instance = this;			

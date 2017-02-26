@@ -14,6 +14,7 @@ public class PickupCollision : MonoBehaviour {
 			pickup.AttachToPlayer(other.gameObject);
 			pickup.gameObject.SetActive(true);
 			Destroy(gameObject);
+			GameEvents.Instance.OnPickupCollected.Invoke(pickup.gameObject);
 		}
 	}
 }
