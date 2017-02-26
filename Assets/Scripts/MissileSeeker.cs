@@ -22,7 +22,7 @@ public class MissileSeeker : MonoBehaviour {
 	}
 	
 	void Update () {		
-		if(target != null){
+		if(target != null && target.active){
 
 			var directionToTarget = target.transform.position - transform.position;
 			Debug.DrawLine(transform.position, target.transform.position);						
