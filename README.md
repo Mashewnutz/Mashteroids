@@ -1,11 +1,13 @@
 # Mashteroids
 
-To play open the title scene and hit run.
-Alternatively you can also load straight into the game scene.
+To play, open the Title scene and hit run.
+Alternatively you can also load straight into the Game scene.
 
-Scenes
-Title - Title screen
-Game - Game scene
+Objective:
+Destroy all the asteroids!
+Ufo's will periodically spawn. Destroy them to collect powerups!
+- Blackhole - blackhole that slows down and pulls in nearby asteroids
+- Missiles - 2 heat seeking missiles that are guaranteed to hit a target
 
 Controls: 
 w - thrust
