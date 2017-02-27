@@ -10,15 +10,15 @@ Ufo's will periodically spawn. Destroy them to collect powerups!
 - Missiles - 2 heat seeking missiles that are guaranteed to hit a target
 
 Controls: 
-w - thrust
-a - turn left
-d - turn right
-e - teleport
-space/leftmouse button - shoot
-left shift/right button - alt shoot
+- w - thrust
+- a - turn left
+- d - turn right
+- e - teleport
+- space/leftmouse button - shoot
+- left shift/right button - alt shoot
 
 Debug (cheating!)
-u - spawn ufo
+- u - spawn ufo
 
 Play Here:
-https://mashewnutz.github.io/Asteroids/web/
+https://mashewnutz.github.io/Mashteroids/web/
