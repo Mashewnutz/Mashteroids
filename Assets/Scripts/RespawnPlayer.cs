@@ -10,7 +10,7 @@ public class RespawnPlayer : MonoBehaviour {
 	private GameObject player;
 
 	void Start() {
-		Spawn();
+		player = Spawn();
 		GameEvents.Instance.OnPlayerDestroyed.AddListener(OnPlayerDestroyed);
 	}
 	
@@ -23,16 +23,19 @@ public class RespawnPlayer : MonoBehaviour {
 		}
 	}
 
-	void Spawn() {
-		player = PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero, Quaternion.identity);
+	GameObject Spawn() {
+		var player = PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero, Quaternion.identity);
+		GameEvents.Instance.OnPlayerSpawned.Invoke(player);
+		return player;
 	}
 	
 	void Respawn(){
 		if(PoolManager.Instance.GetAllocatedCount(PoolId.Player) == 0){
-			player = PoolManager.Instance.Allocate(PoolId.Player, Vector3.zero, Quaternion.identity);
+			player = Spawn();			
 			player.GetComponent<Collider2D>().enabled = false;
 			player.GetComponent<BlinkSprite>().enabled = true;
 			Invoke("TurnOffInvincibility", invincibilityTime);
+				
 		}
 	}
 

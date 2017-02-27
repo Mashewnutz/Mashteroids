@@ -15,8 +15,14 @@ public class GameEvents : MonoBehaviour {
 	public GameObjectEvent OnAsteroidDestroyed = new GameObjectEvent();
 	public GameObjectEvent OnUfoDestroyed = new GameObjectEvent();
 	public GameObjectEvent OnPickupCollected = new GameObjectEvent();
+	public GameObjectEvent OnPlayerSpawned = new GameObjectEvent();
 
 	void Awake(){
-		Instance = this;			
+		if(Instance != null){
+			Destroy(gameObject);
+		} else {
+			Instance = this;
+		}		
+		DontDestroyOnLoad(gameObject);
 	}	
 }
