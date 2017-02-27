@@ -27,9 +27,9 @@ public class ShipInput : MonoBehaviour {
 	}
 
 	void Update() {
-		if(Input.GetMouseButtonDown(0)){
+		if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space)){
 			Fire();
-		} else if(Input.GetMouseButtonUp(0)){
+		} else if(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)){
 			CancelInvoke();			
 		}
 	}
