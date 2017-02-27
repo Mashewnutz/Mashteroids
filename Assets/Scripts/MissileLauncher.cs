@@ -11,20 +11,18 @@ public class MissileLauncher : Pickup {
 		rb2d = player.GetComponent<Rigidbody2D>();
 	}
 
-	void Update () {
-		if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.RightShift)){			
-			if(leftMissile != null){
-				LaunchMissile(leftMissile);				
-				leftMissile = null;
-			} else if(rightMissile != null){
-				LaunchMissile(rightMissile);
-				rightMissile = null;
-			}
+	public override void Use() {		
+		if(leftMissile != null){
+			LaunchMissile(leftMissile);				
+			leftMissile = null;
+		} else if(rightMissile != null){
+			LaunchMissile(rightMissile);
+			rightMissile = null;
+		}
 
-			if(leftMissile == null && rightMissile == null){
-				Destroy(gameObject);
-			}
-		}	
+		if(leftMissile == null && rightMissile == null){
+			Destroy(gameObject);
+		}		
 	}
 
 	void LaunchMissile(GameObject launcher){

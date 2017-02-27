@@ -10,11 +10,9 @@ public class BlackholeLauncher : Pickup {
 		transform.SetParent(player.transform, false);
 	}
 		
-	void Update () {
-		if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.RightShift)){
-			LaunchBlackhole(blackholeLauncher);
-			Destroy(gameObject);
-		}	
+	public override void Use() {
+		LaunchBlackhole(blackholeLauncher);
+		Destroy(gameObject);
 	}
 
 	void LaunchBlackhole(GameObject launcher) {

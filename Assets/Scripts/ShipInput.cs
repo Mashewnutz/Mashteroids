@@ -32,6 +32,13 @@ public class ShipInput : MonoBehaviour {
 		} else if(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space)){
 			CancelInvoke();			
 		}
+
+		if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.RightShift)){
+			var pickup = GetComponentInChildren<Pickup>();
+			if(pickup){
+				pickup.Use();
+			}
+		}
 	}
 		
 	void FixedUpdate () {
