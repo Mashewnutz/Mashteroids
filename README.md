@@ -1,5 +1,12 @@
 # Mashteroids
 
+To play open the title scene and hit run.
+Alternatively you can also load straight into the game scene.
+
+Scenes
+Title - Title screen
+Game - Game scene
+
 Controls: 
 w - thrust
 a - turn left
