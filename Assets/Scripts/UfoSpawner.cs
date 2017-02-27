@@ -23,7 +23,7 @@ public class UfoSpawner : MonoBehaviour {
 		int ufoCount = GetUfoCount();
 		if(ufoCount == 0){
 			if(score.GetScore() > minScoreToSpawnSmallUfo){
-				if(Random.value < 0.5f){
+				if(Random.value < 0.7f){
 					SpawnUfoWithChance(PoolId.SmallUfo, chanceOfSpawningUfo);
 				} else {
 					SpawnUfoWithChance(PoolId.LargeUfo, chanceOfSpawningUfo);

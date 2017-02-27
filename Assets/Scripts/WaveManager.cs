@@ -22,9 +22,13 @@ public class WaveManager : MonoBehaviour {
 
 	void CheckWaveCleared() {
 		int totalObjects = GetTotalObjectCount();
-		if(totalObjects == 0){
-			GameEvents.Instance.OnWaveCleared.Invoke(wave);			
-			Invoke("SpawnNewWave", delayBetweenWaves);
+		if(totalObjects == 0){			
+			GameEvents.Instance.OnWaveCleared.Invoke(wave);
+			if(wave == 33){
+				GameEvents.Instance.OnGameWon.Invoke();
+			} else {
+				Invoke("SpawnNewWave", delayBetweenWaves);
+			}			
 		}
 	}
 
