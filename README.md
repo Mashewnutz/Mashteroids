@@ -21,4 +21,4 @@ Debug (cheating!)
 - u - spawn ufo
 
 Play Here:
-https://mashewnutz.github.io/Mashteroids/web/
+https://thekiwicoder0.github.io/Mashteroids/web/
